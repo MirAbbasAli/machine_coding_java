@@ -1,0 +1,56 @@
+Class Diagram:
+
+GameStatus <enum>
+CONTINUE, END
+
+Piece <enum>
+x, o
+
+Player <class>
+playerId: int
+playerName: str
+piece_type: piece
+
+Game <service-class>
+board: list<str>[3][3] (possible values - : empty, x, o)
+display_board(): print board
+display_players(): print player name who makes a move
+check_move_status(position): bool
+check_position(x, y, current_piece): bool
+make_move(position, player_number): bool
+check_game(position, player_num): GameStatus
+
+InitializeGame <class>
+process_player_info(): Player[]
+sanitize_position(num): int
+process_moves(Game): void
+
+Test Case Scenario
+1 1
+1 3
+2 2
+3 3
+2 3
+2 1
+1 2
+3 2
+3 1
+o/p draw
+
+1 1
+1 3
+2 2
+3 3
+2 3
+2 1
+exit
+
+Gaurav
+Sagar
+2 2
+1 3
+1 1
+1 2
+2 2
+3 3
+exit
