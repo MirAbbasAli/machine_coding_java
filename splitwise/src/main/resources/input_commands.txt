@@ -1,0 +1,13 @@
+create_user u1 u1@a.com
+create_user u2 u2@a.com
+create_user u3 u3@a.com
+create_user u4 u4@a.com
+create_group group1 u1,u2,u3,u4
+expense u1 1000 4 u1 u2 u3 u4 equal
+show u4
+show u1
+expense u1 1250 2 u2 u3 exact 370 880
+show
+expense u4 1200 4 u1 u2 u3 u4 percent 40 20 20 20
+show u1
+show
