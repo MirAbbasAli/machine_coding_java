@@ -1,0 +1,32 @@
+input:
+add-rooms single,1000.00,2
+add-rooms double,2000.00,2
+add-rooms suite,3000.00,2
+view-bookings 101
+search-room single 2025-01-10 2025-01-13
+book-room 101 user1 2025-01-10 2025-01-13
+cancel-booking user1-101-1
+view-my-bookings user1
+book-room 102 user1 2025-01-10 2025-01-13
+view-bookings 101
+check-in user1-101-1
+check-in user1-102-2
+search-room single 2025-01-10 2025-01-13
+check-out user1-102-2
+
+output:
+created single room, room number: 101 102
+created double room, room number: 103 104
+created suite room, room number: 105 106
+No bookings
+Available rooms: 101 102
+Booked room 101, booking-id: user1-101-1
+Booking user1-101-1 cancelled
+Booking(id:user1-101, room: 101, checkIn: 2025-01-10, checkOut: 2025-01-11, booking-status:Cancelled)
+Booked room 101, booking-id: user1-101-2
+Booking(id:user1-101-1, room: 101, checkIn: 2025-01-10, checkOut: 2025-01-11, booking-status:Cancelled)
+Booking(id:user1-101-2, room: 101, checkIn: 2025-01-10, checkOut: 2025-01-11, booking-status:Booked)
+Checked in: Booking(id:user1-101-2, room: 101, checkIn: 2025-01-10, checkOut: 2025-01-11, booking-status:CHECK_IN)
+Available rooms: 102
+Checked out: Booking(id:user1-101-2, room: 101, checkIn: 2025-01-10, checkOut: 2025-01-11, booking-status:CHECK_OUT)
+
