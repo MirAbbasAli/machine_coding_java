@@ -1,0 +1,43 @@
+Product<class>
+id: string
+name: string
+price: double
+
+Stock<class>
+id: integer
+product: Product
+quantity: integer
+
+OrderStatus<enum>
+Ordered, Cancelled
+
+Order<class>
+id: integer
+product: Product
+quantity: integer
+orderDate: date
+orderStatus: OrderStatus
+
+ProductService<class>
+addProduct(name, quantity, price): productId
+deleteProduct(productId): Boolean
+updateProduct(productId, quantity, price): Boolean
+viewProduct(productId): Product
+listProducts(): List<Product>
+
+StockService<class>
+addStock(productId, quantity): Boolean
+removeStock(productId, quantity): Boolean
+checkStock(productId): stock
+
+OrderService<class>
+createOrder(productId, quantity): orderId
+cancelOrder(orderId): Boolean
+listOrders(orderStatus): List<Order>
+viewOrder(orderId): Order
+
+ReportingService<class>
+inventoryReport(): List<Stock>
+salesReport(productId): list<Order>
+salesReport(tillDate): list<Order>
+lowStockReport(threshold): List<Stock>
