@@ -60,8 +60,9 @@ public class InputDriver {
             System.out.println(productId + " product has no stock yet");
             return;
         }
-        int stockId = stockService.addStock(product.get(), quantity);
-        System.out.println(stockId + " is created");
+        boolean isAdded = stockService.addStock(product.get(), quantity);
+        if (isAdded) System.out.println("Stock is updated");
+        else System.out.println("Stock isn't updated");
     }
 
     public void removeStock(String productId, Integer quantity){
@@ -119,13 +120,13 @@ public class InputDriver {
         stocks.forEach(System.out::println);
     }
 
-    public void salesReport(String productId, LocalDate tillDate){
-        if(!productId.isEmpty()){
-            Optional<Product> product = productService.findById(productId);
-            if(product.isEmpty()) return;
-            orderService.salesReport(product.get()).forEach(System.out::println);
-            return;
-        }
+    public void salesReport(String productId){
+        Optional<Product> product = productService.findById(productId);
+        if(product.isEmpty()) return;
+        orderService.salesReport(product.get()).forEach(System.out::println);
+    }
+
+    public void salesReport(LocalDate tillDate){
         orderService.salesReport(tillDate).forEach(System.out::println);
     }
 

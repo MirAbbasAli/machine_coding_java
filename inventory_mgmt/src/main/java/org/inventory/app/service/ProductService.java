@@ -26,7 +26,7 @@ public class ProductService {
         optionalStock.ifPresentOrElse(stock -> {
             stockService.updateStock(stock, quantity);
         }, () -> {
-            stockService.addStock(product, quantity);
+            stockService.addStockForNewProduct(product, quantity);
         });
 
         return productId;
@@ -37,7 +37,14 @@ public class ProductService {
         Optional<Product> optionalProduct = findById(productId);
         if (optionalProduct.isEmpty()) return Boolean.FALSE;
         optionalProduct.ifPresentOrElse(
-                product -> product.setPrice(price),
+                product -> {
+                    product.setPrice(price);
+                    var stock = stockService.findByProduct(product);
+                    stock.ifPresent(s -> {
+                        s.setQuantity(0);
+                        s.setQuantity(quantity);
+                    });
+                },
                 () -> stockService.checkStock(productId).ifPresent(stock -> stockService.updateStock(stock, quantity))
         );
         return Boolean.TRUE;

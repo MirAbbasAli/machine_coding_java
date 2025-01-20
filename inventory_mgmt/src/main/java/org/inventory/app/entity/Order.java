@@ -17,7 +17,7 @@ public class Order {
         this.products = products;
         this.orderDate = orderDate;
         this.orderStatus = OrderStatus.ORDERED;
-        this.totalPrice = 0.0;
+        this.totalPrice = products.keySet().stream().mapToDouble(product -> products.get(product) * product.getPrice()).sum();
     }
 
     public Integer getId() {
