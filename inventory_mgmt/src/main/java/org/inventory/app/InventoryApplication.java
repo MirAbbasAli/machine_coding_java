@@ -55,10 +55,10 @@ public class InventoryApplication {
                         int numOfProducts = Integer.parseInt(commands[1]);
                         products = new String[numOfProducts];
                         quantities = new Integer[numOfProducts];
-                        for(int i=0; i<numOfProducts; i++){
-                            String[] parts = commands[2].split(",");
-                            products[i] = parts[0];
-                            quantities[i] = Integer.parseInt(parts[1]);
+                        for(int i=2; i<2+numOfProducts; i++){
+                            String[] parts = commands[i].split(",");
+                            products[i-2] = parts[0];
+                            quantities[i-2] = Integer.parseInt(parts[1]);
                         }
                         driver.createOrder(products, quantities);
                         break;
@@ -76,9 +76,10 @@ public class InventoryApplication {
                         break;
                     case "sales_report":
                         try{
-                            driver.salesReport(null, parseToLocalDate(commands[1]));
+                            LocalDate date = parseToLocalDate(commands[1]);
+                            driver.salesReport(date);
                         } catch(DateTimeParseException e){
-                            driver.salesReport(commands[1], null);
+                            driver.salesReport(commands[1]);
                         }
                         break;
                     case "low_stock_report":

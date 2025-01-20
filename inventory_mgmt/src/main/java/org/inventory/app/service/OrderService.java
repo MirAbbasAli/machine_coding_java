@@ -34,6 +34,7 @@ public class OrderService {
     public Boolean cancelOrder(Integer orderId) {
         Order order = viewOrder(orderId);
         if(order == null) return Boolean.FALSE;
+        order.setOrderStatus(OrderStatus.CANCELLED);
         order.getProducts().keySet()
                 .forEach(product -> {
                     stockService.addStock(product, order.getProducts().get(product));
@@ -62,7 +63,7 @@ public class OrderService {
 
     public List<Order> salesReport(LocalDate tillDate){
         return orders.stream()
-                .filter(order -> order.getOrderDate().isBefore(tillDate))
+                .filter(order -> order.getOrderDate().isBefore(tillDate) || order.getOrderDate().isEqual(tillDate))
                 .toList();
     }
 }
